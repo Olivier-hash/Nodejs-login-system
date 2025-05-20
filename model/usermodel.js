@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize')
 
 const dbconn = require('../config/db');
 
-const Users = dbconn.dbconn.define('users',{
+const Users = dbconn.define('users',{
     fullName: {
         type: DataTypes.STRING,
         allowNull:false,
@@ -17,7 +17,7 @@ const Users = dbconn.dbconn.define('users',{
         allowNull:false,
         unique:true,
         validate: {
-            isEMail:true
+           isEmail:true
         }
 
     },
