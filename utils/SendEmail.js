@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-const sendEmail = async ( email, password, text )=>{
+const sendEmail = async ( email,subject,text )=>{
 
     try {
         const Transporter = nodemailer.createTransport({
@@ -15,10 +15,10 @@ const sendEmail = async ( email, password, text )=>{
             }
         })
 
-        await Transporter.sendEmail({
+        await Transporter.sendMail({
             from: process.env.EMAIL_USER,
             to:email,
-            subject: "welcome to our Nodejs app",
+            subject: subject,
             text:text
         })
     } catch (error) {

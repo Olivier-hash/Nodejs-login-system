@@ -7,7 +7,7 @@ dotenv.config();
 const dbconn = require('./config/db');
 const userRoutes = require('./Routes/userRoutes')
 
-dbconn.sync().then(()=>{
+dbconn.sync({force:true}).then(()=>{
     console.log('db synced successfully');
     
 })
