@@ -16,6 +16,9 @@ app.use(express.json())
 
 app.use('/api/user', userRoutes)
 
+
+
+
 const port = process.env.PORT
 
 app.listen(port, ()=> {

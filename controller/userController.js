@@ -1,5 +1,5 @@
 
-const userModel = require('../model/usermodel')
+const {UserModel} = require('../models')
 const sendEmail = require('../utils/SendEmail')
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
@@ -11,7 +11,7 @@ exports.createUser = async (req, res) => {
     const {fullName,email,password} = req.body
 try {
     // check if the email is already registered
-    const ExistingUser = await userModel.findOne({where:{email}})
+    const ExistingUser = await UserModel.findOne({where:{email}})
 
     const hashpass = await bcrypt.hash(password, 10)
 
@@ -19,12 +19,12 @@ try {
 
     
 
-    const user = await userModel.create({
+    const user = await UserModel.create({
         fullName,
         email,
         password: hashpass,
         token,
-    isVerified: false,})
+        isVerified: false,})
 
     const message = `${process.env.BASE_URL}/verify/${user.id}/${user.token}`
 
@@ -48,18 +48,18 @@ exports.verifyEmail = async (req, res) => {
 
     try {
 
-        const user = await userModel.findByPk(id)
+        const user = await UserModel.findByPk(id)
         if(!user) {
             return res.json({message: 'user not found'})
         }
 
-        const token = await userModel.findOne({token: user.token})
+        const token = await UserModel.findOne({token: user.token})
 
         if(!token) {
             return res.json({message: 'token not found'})
         }
-            await userModel.findOne({isVerified:true})
-            await userModel.findOne({token: null})
+            await UserModel.findOne({isVerified:true})
+            await UserModel.findOne({token: null})
 
             res.json({message: 'user is verified succesfully'})
        
