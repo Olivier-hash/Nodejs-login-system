@@ -27,6 +27,14 @@ const Users = dbconn.define('users',{
         validate:{
             len:[8]
         }
+    },
+    isVerified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+
+    token: {
+        type: DataTypes.STRING
     }
 })
 
