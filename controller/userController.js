@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
 
     const {fullName,email,password} = req.body
 try {
-    // check if the email is already registered
+    // check if the email is already registered   and is valideted
     const ExistingUser = await UserModel.findOne({where:{email}})
 
     const hashpass = await bcrypt.hash(password, 10)
