@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 dotenv.config();
 
-//jasjdj
+//jasj
 const sendEmail = async ( email,subject,text )=>{
 
     try {
